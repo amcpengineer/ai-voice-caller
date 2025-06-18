@@ -1,23 +1,25 @@
 # Download the helper library from https://www.twilio.com/docs/python/install
 from twilio.rest import Client
+from config.settings import config
+
 
 # Find your Account SID and Auth Token at twilio.com/console
 # and set the environment variables. See http://twil.io/secure
-account_sid = "AC4f2de8fb999f13ee1c63208bc71e19b5"
-auth_token = "85bc684001260ed770af253f908b3a9b"
+account_sid = config.TWILIO_ACCOUNT_SID
+auth_token = config.TWILIO_AUTH_TOKEN
 client = Client(account_sid, auth_token)
 
 # Phone numbers in E.164 format
-twilio_number = '+15393456978'     # Your Twilio phone number
-destination_number = '+18582542803' # The recipient's number
+twilio_number = config.TWILIO_PHONE_NUMBER     # Your Twilio phone number
+destination_number = config.DESTINATION_NUMBER # The recipient's number
 
 # TwiML Bin URL (replace with your actual one)
-#twiml_bin_url = 'https://handler.twilio.com/twiml/EH9ab4b8344feafc1b52a1c0ad4aa1b56b'
+twiml_bin_url = config.TWIML_TEST_URL
 
 call = client.calls.create(
     to=destination_number,
     from_=twilio_number,
-    url='https://a790-181-33-169-236.ngrok-free.app/outbound'  # your public Flask URL + '/outbound'
+    url=twiml_bin_url
 
 )
 
