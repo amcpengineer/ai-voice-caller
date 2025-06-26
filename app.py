@@ -6,15 +6,16 @@ import os
 from datetime import datetime
 from config.settings import config
 
+# Ensure logs directory exists
+os.makedirs('logs', exist_ok=True)
+
 # Configure logging
 logging.basicConfig(
+    filename='logs/voice_caller.log',
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('voice_caller.log'),
-        logging.StreamHandler()
-    ]
+    format='%(asctime)s - %(levelname)s - %(message)s'
 )
+
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
@@ -283,9 +284,10 @@ def internal_error(error):
     logger.error(f"500 error: {str(error)}", exc_info=True)
     return create_error_response()
 
+# Remove the direct execution - let main.py handle this
 if __name__ == "__main__":
     logger.info("Starting Voice Caller Application")
     logger.info(f"OpenAI API Key configured: {'Yes' if client.api_key else 'No'}")
     
-    # Run in debug mode for development, disable for production
+    # For direct execution (fallback)
     app.run(debug=True, host='0.0.0.0', port=5000)

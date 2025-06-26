@@ -6,9 +6,9 @@ from config.settings import config
 # ==== TWILIO CONFIGURATION ====
 # Replace these with your actual Twilio credentials
 # You can find these in your Twilio Console: https://console.twilio.com/
-account_sid = config.TWILIO_account_sid
-auth_token = config.TWILIO_auth_token
-twilio_number = config.twilio_number   # Format: +1234567890
+account_sid = config.TWILIO_ACCOUNT_SID
+auth_token = config.TWILIO_AUTH_TOKEN
+twilio_number = config.TWILIO_PHONE_NUMBER   # Format: +1234567890
 
 # Alternatively, use environment variables (more secure):
 # account_sid = os.getenv('TWILIO_account_sid')
@@ -16,7 +16,7 @@ twilio_number = config.twilio_number   # Format: +1234567890
 # twilio_number = os.getenv('twilio_number')
 
 # ==== CALL CONFIGURATION ====
-destination_number = config.destination_number  # Replace with the number you want to call
+destination_number = config.DESTINATION_NUMBER  # Replace with the number you want to call
 flask_url_outbound = config.FLASK_SERVER_URL_OUTBOUND
 
 def validate_credentials():
